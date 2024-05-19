@@ -34,10 +34,10 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-              docker load -i ~/docker/sergheev-com-amd64.tar
-              docker tag sergheev-com-amd64:latest sergheev-com-amd64:previous
-              docker tag image sergheev-com-amd64:latest
-              docker stop vapor || true
-              docker rm vapor || true
-              docker run --restart unless-stopped -d --name vapor -p 8080:8080 sergheev-com-amd64:latest
-              docker system prune -f
+              sudo docker load -i ~/docker/sergheev-com-amd64.tar
+              sudo docker tag sergheev-com-amd64:latest sergheev-com-amd64:previous
+              sudo docker tag image sergheev-com-amd64:latest
+              sudo docker stop vapor || true
+              sudo docker rm vapor || true
+              sudo docker run --restart unless-stopped -d --name vapor -p 8080:8080 sergheev-com-amd64:latest
+              sudo docker system prune -f
