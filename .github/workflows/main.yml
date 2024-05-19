@@ -28,7 +28,7 @@ jobs:
           source: "sergheev-com-amd64.tar"
           target: "~/docker/"
       - name: deploy container to ec2
-        uses: appleboy/scp-action@v1.0.3
+        uses: appleboy/ssh-action@v1.0.3
         with: 
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
