@@ -23,5 +23,5 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
-          source: "./sergheev-com-amd64.tar"
+          source: "sergheev-com-amd64.tar"
           target: "~/docker/"
