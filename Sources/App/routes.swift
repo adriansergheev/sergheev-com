@@ -1,13 +1,14 @@
 import Vapor
+import HtmlVaporSupport
 
-func routes(_ app: Application) throws {
-    app.get { req async in
-        req.fileio.streamFile(at: "Public/index.html") 
-    }
-    app.get("photoguessr-appstore") { req async in
-        req.fileio.streamFile(at: "Public/photoguessr-appstore.html")
-    }
-    app.get("docker") { req in
-        "docker" 
-    }
+func routes(_ app: Vapor.Application) throws {
+	//	app.get { req async in
+	//		req.fileio.streamFile(at: "Public/index.html")
+	//	}
+	app.get { req async in
+		layout(title: "home", content: home)
+	}
+	app.get("photoguessr-appstore") { req async in
+		req.fileio.streamFile(at: "Public/photoguessr-appstore.html")
+	}
 }
