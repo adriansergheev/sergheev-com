@@ -38,4 +38,7 @@ let stylesheet: StaticString = """
 			text-decoration: none;
 			color: #e1e8d0;
 		}
+		.link {
+				margin-right: 10px;
+		}
 """
