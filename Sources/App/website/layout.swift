@@ -1,6 +1,6 @@
 import HtmlVaporSupport
 
-func layout(title: String, content: Node) -> Node {
+public func layout(title: String, content: Node) -> Node {
 	return [
 		.doctype,
 		.html(
