@@ -1,5 +1,5 @@
 {
-  "originHash" : "073e22dd8b7ff589ef7330350a18d80cd0dd96e67bc3f7b4b05e9281cb962946",
+  "originHash" : "a690877829db63bd0e1214a55f816f169a6abbbe6b42a2aebcec8655e9016ae9",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/multipart-kit.git",
       "state" : {
-        "revision" : "12ee56f25bd3fc4c2d09c2aa16e69de61dc786e8",
-        "version" : "4.6.0"
+        "revision" : "3c9558f8339c95782ab89db1aa43acb4bf32b448",
+        "version" : "4.6.1"
       }
     },
     {
@@ -80,6 +80,24 @@
       "state" : {
         "revision" : "bc1c29221f6dfeb0ebbfbc98eb95cd3d4967868e",
         "version" : "3.4.0"
+      }
+    },
+    {
+      "identity" : "swift-html",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-html",
+      "state" : {
+        "revision" : "f53c38c4b841841f36afa1866093c908cadaa736",
+        "version" : "0.4.0"
+      }
+    },
+    {
+      "identity" : "swift-html-vapor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/adriansergheev/swift-html-vapor.git",
+      "state" : {
+        "branch" : "f0eb9d7",
+        "revision" : "f0eb9d7e20a019243e9a5716b85c5030b095c8d5"
       }
     },
     {
@@ -164,6 +182,24 @@
       }
     },
     {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
+      "state" : {
+        "revision" : "625ccca8570773dd84a34ee51a81aa2bc5a4f97a",
+        "version" : "1.16.0"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "303e5c5c36d6a558407d364878df131c3546fad8",
+        "version" : "510.0.2"
+      }
+    },
+    {
       "identity" : "swift-system",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system.git",
@@ -177,8 +213,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "90da64ad52ee595d199212338b89995bcab99d0e",
-        "version" : "4.100.0"
+        "revision" : "2c185b7ec980ddd815d325a4655f30e66b1a53bc",
+        "version" : "4.100.2"
       }
     },
     {
