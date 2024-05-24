@@ -6,6 +6,9 @@ let package = Package(
 	platforms: [
 		.macOS(.v13)
 	],
+	products: [
+		.library(name: "App", targets: ["App"]),
+	],
 	dependencies: [
 		.package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
 		.package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
@@ -13,6 +16,12 @@ let package = Package(
 	],
 	targets: [
 		.executableTarget(
+			name: "Run",
+			dependencies: [
+				"App"
+			]
+		),
+		.target(
 			name: "App",
 			dependencies: [
 				.product(name: "Vapor", package: "vapor"),
