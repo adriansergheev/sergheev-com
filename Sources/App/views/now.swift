@@ -1,7 +1,5 @@
 import HtmlVaporSupport
 
-let nowPage: Node = [
-	.div(
-		
-	)
-]
+//let nowPage: Node = [
+//	.div()
+//]

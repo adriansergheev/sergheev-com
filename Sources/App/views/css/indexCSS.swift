@@ -84,4 +84,26 @@ header, main, footer {
 .icon-ios {
 		border-radius: 25%;
 }
+
+@media only screen and (max-width: 1000px) {
+	.greeting {
+		line-height: 1.1;
+	}
+	.work li {
+		width: 70px;
+	}
+	footer {
+			padding-bottom:2em
+	}
+	header {
+			padding-top:2em
+	}
+}
+
+@media only screen and (max-width: 800px) {
+		header, main, footer {
+				padding-left: 1.5em;
+				padding-right:1.5em
+		}
+}
 """

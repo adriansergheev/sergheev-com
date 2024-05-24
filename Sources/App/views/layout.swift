@@ -8,6 +8,7 @@ public func layout(title: String, content: Node) -> Node {
 				.title(title),
 				.style(safe: indexCSS),
 				.style(safe: miniresetCSS),
+				.meta(viewport: .width(.deviceWidth), .initialScale(1)),
 				.script(attributes: [
 					.defer(true),
 					.data("domain", "sergheev.com"),
