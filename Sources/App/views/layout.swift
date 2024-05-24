@@ -6,9 +6,8 @@ public func layout(title: String, content: Node) -> Node {
 		.html(
 			.head(
 				.title(title),
-				// include inline stylesheets
-				.style(safe: stylesheet),
-				// plausible analytics
+				.style(safe: indexCSS),
+				.style(safe: miniresetCSS),
 				.script(attributes: [
 					.defer(true),
 					.data("domain", "sergheev.com"),
@@ -16,14 +15,13 @@ public func layout(title: String, content: Node) -> Node {
 				])
 			),
 			.body(
-				.main(content)
-				//				footer
+				.main(content),
+				footer
 			)
 		)
 	]
 }
 
 let footer: Node = [
-	.hr,
-	.footer("© 2024 Adrian Sergheev")
+	.footer("© 2024")
 ]
