@@ -24,5 +24,11 @@ public func layout(title: String, content: Node) -> Node {
 }
 
 let footer: Node = [
-	.footer("© 2024")
+	.footer(
+		"© 2024",
+		.br,
+		"Design inspired by ",
+		.a(attributes: [.href("https://www.stephencelis.com")], "Stephen Celis's"),
+		" website."
+	)
 ]
