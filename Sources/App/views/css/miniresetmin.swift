@@ -23,8 +23,8 @@ h3,
 h4,
 h5,
 h6 {
-		margin: 0;
-		padding: 0
+ margin: 0;
+ padding: 0
 }
 
 h1,
@@ -33,43 +33,43 @@ h3,
 h4,
 h5,
 h6 {
-		font-size: 100%;
-		font-weight: normal
+ font-size: 100%;
+ font-weight: normal
 }
 
 button,
 input,
 select {
-		margin: 0
+ margin: 0
 }
 
 html {
-		box-sizing: border-box
+ box-sizing: border-box
 }
 
 *,
 *::before,
 *::after {
-		box-sizing: inherit
+ box-sizing: inherit
 }
 
 img,
 video {
-		height: auto;
-		max-width: 100%
+ height: auto;
+ max-width: 100%
 }
 
 iframe {
-		border: 0
+ border: 0
 }
 
 table {
-		border-collapse: collapse;
-		border-spacing: 0
+ border-collapse: collapse;
+ border-spacing: 0
 }
 
 td,
 th {
-		padding: 0
+ padding: 0
 }
 """
