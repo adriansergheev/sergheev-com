@@ -1,6 +1,6 @@
 import HtmlVaporSupport
 
-public let homepage: Node = [
+public let homePage: Node = [
 	.div(
 		attributes: [.class("box")],
 		.h1("Adrian Sergheev"),

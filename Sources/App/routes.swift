@@ -11,7 +11,7 @@ public func configure(_ app: Vapor.Application) async throws {
 
 func routes(_ app: Vapor.Application) throws {
 	app.get { req async in
-		layout(title: "home", content: homepage)
+		layout(title: "home", content: homePage)
 	}
 	app.get("photoguessr-appstore") { req async in
 		req.fileio.streamFile(at: "Public/photoguessr-appstore.html")
