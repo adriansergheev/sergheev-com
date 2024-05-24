@@ -12,9 +12,9 @@ func routes(_ app: Vapor.Application) throws {
 	app.get { req async in
 		layout(title: "home", content: homePage)
 	}
-	//	app.get("photoguessr-appstore") { req async in
-	//		req.fileio.streamFile(at: "Public/photoguessr-appstore.html")
-	//	}
+	app.get("photoguessr-appstore") { req async in
+		req.fileio.streamFile(at: "Public/photoguessr-appstore.html")
+	}
 	//	app.get("images", ":imageName") { req async in
 	//		guard let imageName = req.parameters.get("imageName")
 	//		else { return Response.init(status: .notFound) }
