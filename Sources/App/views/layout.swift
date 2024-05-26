@@ -7,7 +7,6 @@ public func layout(title: String, content: Node) -> Node {
 			.head(
 				.title(title),
 				.style(safe: indexCSS),
-				.style(safe: miniresetCSS),
 				.meta(viewport: .width(.deviceWidth), .initialScale(1)),
 				.script(attributes: [
 					.defer(true),
@@ -16,19 +15,15 @@ public func layout(title: String, content: Node) -> Node {
 				])
 			),
 			.body(
-				.main(content),
-				footer
+				.main(content)
+//				footer
 			)
 		)
 	]
 }
 
-let footer: Node = [
-	.footer(
-		"© 2024",
-		.br,
-		"Design inspired by ",
-		.a(attributes: [.href("https://www.stephencelis.com")], "Stephen Celis's"),
-		" website."
-	)
-]
+//let footer: Node = [
+//	.footer(
+//		"© 2024",
+//	)
+//]
