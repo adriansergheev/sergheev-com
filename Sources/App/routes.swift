@@ -7,6 +7,7 @@ public func configure(_ app: Vapor.Application) async throws {
 }
 
 func routes(_ app: Vapor.Application) throws {
+  //TODO: use app router.
   app.mount(router, use: siteHandler)
 }
 
