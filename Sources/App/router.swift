@@ -1,19 +1,24 @@
 import Vapor
 @preconcurrency import VaporRouting
 
-public func configure(_ app: Vapor.Application) async throws {
-  app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
-  try routes(app)
-}
-
-func routes(_ app: Vapor.Application) throws {
-  //TODO: use app router.
-  app.mount(router, use: siteHandler)
-}
-
 let router = OneOf {
   Route(.case(SiteRoute.home))
   Route(.case(SiteRoute.photoGuessrAppStore))
+}
+
+enum SiteRouterKey: StorageKey {
+  typealias Value = AnyParserPrinter<URLRequestData, SiteRoute>
+}
+
+extension Application {
+  var router: SiteRouterKey.Value {
+    get {
+      self.storage[SiteRouterKey.self]!
+    }
+    set {
+      self.storage[SiteRouterKey.self] = newValue
+    }
+  }
 }
 
 enum SiteRoute {
