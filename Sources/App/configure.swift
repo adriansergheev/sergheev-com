@@ -8,7 +8,7 @@ public func configure(_ app: Vapor.Application) async throws {
     case .development, .testing:
       "http://localhost:8080"
     default:
-      "https://www.sergheev.com:8080"
+      "https://www.sergheev.com"
     }
   }
   app.router = router
