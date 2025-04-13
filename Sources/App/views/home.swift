@@ -1,23 +1,37 @@
-import HtmlVaporSupport
+@preconcurrency import HtmlVaporSupport
 
-let homePage: Node = [
+public let homePage: Node = [
   .div(
     attributes: [.class("box")],
-    .h1("Hey"),
-    .div(attributes: [.class("divider")]),
+    .h1("Adrian Sergheev"),
     .p(
-      "I’m Adrian and I live in Stockholm.",
+      "I’m a developer at ",
+      .a(attributes: [.href("https://sveasolar.se/sv-se"), .target(.blank), .class("inline-link")], "Svea Solar"),
+      ", where I'm working on the iOS app.",
       .br,
-      "I write code for a living with my focus being on Apple platforms.",
       .br,
-      "Are you currently in Stockholm? ",
-      .a(attributes: [.href("https://cal.com/sergheev/15min"), .target(.blank), .class("inline-link")], "Let’s grab a coffee!"),
-      .br
+      "When I'm not writing code, I typically enjoy training ",
+      .a(attributes: [.href("https://en.wikipedia.org/wiki/Brazilian_jiu-jitsu"), .target(.blank), .class("inline-link")], "BJJ"),
+      ", walking around ",
+      .a(attributes: [.href("https://sv.wikipedia.org/wiki/Stora_Nyckelviken"), .target(.blank), .class("inline-link")], "Nyckelviken"),
+      ", or playing guitar.",
+      .br,
+      "Besides that, I'm interested in the ethical implications of AI. I also think people should have the choice to ",
+      .a(attributes: [.href("https://en.wikipedia.org/wiki/Life_extension"), .target(.blank), .class("inline-link")], "live longer"),
+      " if they wish to do so.",
+      .br,
+      .br,
+      "Feel free to contact me at ",
+      .a(attributes: [.href("mailto:contact@sergheev.com")], "contact@sergheev.com"),
+      ", or on ",
+      .a(attributes: [.href("https://x.com/adriansergheev"), .target(.blank)], "Twitter"),
+      "."
     ),
     .div(attributes: [.class("divider")]),
-    .a(attributes: [.href("mailto:contact@sergheev.com")], "contact@sergheev.com"),
-    .a(attributes: [.href("https://www.linkedin.com/in/sergheevadrian/"), .target(.blank), .class("link")], "LinkedIn"),
-    .a(attributes: [.href("https://github.com/adriansergheev"), .target(.blank), .class("link")], "GitHub"),
-    .a(attributes: [.href("https://x.com/adriansergheev"), .target(.blank)], "Twitter")
+    .p(
+      "Links:",
+      .br,
+      .a(attributes: [.href("https://x.com/adriansergheev"), .target(.blank)], "My first article")
+    )
   )
 ]
