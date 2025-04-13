@@ -39,7 +39,7 @@ public let homePage: Node = [
       .a(attributes: [.href("https://github.com/adriansergheev/eden"), .target(.blank)], "Messing around with ScreenTime api (Github)"),
       .br,
       .a(attributes: [.href("https://www.youtube.com/watch?v=rYC-TnKoi40"), .target(.blank)], "Intro to Swift (for functional programmers) (Youtube)"),
-      .br,
+      .br
     )
   )
 ]
