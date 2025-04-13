@@ -5,9 +5,9 @@ public let homePage: Node = [
     attributes: [.class("box")],
     .h1("Adrian Sergheev"),
     .p(
-//      "I’m a developer at ",
-//      .a(attributes: [.href("https://sveasolar.se/sv-se"), .target(.blank), .class("inline-link")], "Svea Solar"),
-//      ", where I'm working on the iOS app.",
+      //      "I’m a developer at ",
+      //      .a(attributes: [.href("https://sveasolar.se/sv-se"), .target(.blank), .class("inline-link")], "Svea Solar"),
+      //      ", where I'm working on the iOS app.",
       "I’m a developer at ",
       .a(attributes: [.href("https://en.wikipedia.org/wiki/Schibsted"), .target(.blank), .class("inline-link")], "Schibsted Marketplaces"),
       ", where I'm working on one of the iOS apps.",
