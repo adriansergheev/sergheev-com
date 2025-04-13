@@ -31,7 +31,12 @@ public let homePage: Node = [
     .p(
       "Links:",
       .br,
-      .a(attributes: [.href("https://x.com/adriansergheev"), .target(.blank)], "My first article")
+      .a(attributes: [.href("https://github.com/adriansergheev/photoguessr"), .target(.blank)], "GeoGuessr - but for photos (Github)"),
+      .br,
+      .a(attributes: [.href("https://github.com/adriansergheev/eden"), .target(.blank)], "Messing around with ScreenTime api (Github)"),
+      .br,
+      .a(attributes: [.href("https://www.youtube.com/watch?v=rYC-TnKoi40"), .target(.blank)], "Intro to Swift (for functional programmers) (Youtube)"),
+      .br,
     )
   )
 ]
