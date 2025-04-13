@@ -1,49 +1,137 @@
 let indexCSS: StaticString = """
-        body,
-        html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000;
-            font-family: Arial, sans-serif;
-            color: #e1e8d0;
-        }
+html {
+    font-size: 15px;
+    scroll-behavior: smooth;
+}
 
-        .box {
-            background-color: #000;
-            color: #e1e8d0;
-            width: 600px;
-        }
+body {
+    background-color: #fffff8;
+    color: #111;
+    line-height: 1.6;
+    margin: 40px;
+    padding: 0px;
+}
 
-        .box h1 {
-            margin: 0;
-            font-size: 24px;
-        }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+    line-height: 1;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
 
-        .divider {
-            height: 1px;
-            background-color: #e1e8d0;
-            margin: 20px 0;
-        }
+h1 {
+    font-size: 3.2rem;
+    margin-bottom: 1.5rem;
+}
 
-        .box p {
-            margin: 10px 0 20px;
-            line-height: 1.5;
-        }
+h2 {
+    font-size: 2.2rem;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+}
 
-        .box a {
-            display: block;
-            padding: 6px 0px;
-            text-decoration: none;
-            color: #e1e8d0;
-        }
+h3 {
+    font-size: 1.7rem;
+    font-style: italic;
+}
 
-        .box a.inline-link {
-            display: inline;
-            padding: 0;
-            color: inherit;
-            text-decoration: underline;
-        }
+h4 {
+    font-size: 1.5rem;
+    font-style: italic;
+}
+
+p,
+dl,
+ol,
+ul {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+}
+
+blockquote {
+    font-size: 1.4rem;
+    font-style: italic;
+    margin: 3em 0;
+}
+
+blockquote footer {
+    font-size: 1.1rem;
+    font-style: normal;
+    text-align: right;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 1.5px;
+}
+
+hr {
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+}
+
+figcaption {
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.654;
+}
+
+.marginnote,
+.sidenote {
+    float: right;
+    clear: right;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-right: -10%;
+    position: relative;
+}
+
+.subtitle {
+    font-style: italic;
+    font-size: 1.8rem;
+    margin: 1rem 0;
+}
+
+.newthought {
+    font-variant: small-caps;
+    font-size: 1.2em;
+}
+
+::selection {
+    background-color: #cfcfcf;
+}
+
+.container {
+    width: 100%;
+    max-width: 1024px;
+    margin: auto;
+    padding: 0 1rem;
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #111;
+    margin: 20px 0;
+}
+
+@media (max-width: 730px) {
+
+    dl,
+    ol,
+    ul,
+    p {
+        font-size: 1.25rem;
+        line-height: 1.45;
+    }
+}
 """
