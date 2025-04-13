@@ -5,9 +5,9 @@ public let homePage: Node = [
     attributes: [.class("box")],
     .h1("Adrian Sergheev"),
     .p(
-//      "I’m a developer at ",
-//      .a(attributes: [.href("https://sveasolar.se/sv-se"), .target(.blank), .class("inline-link")], "Svea Solar"),
-//      ", where I'm working on the iOS app.",
+      //      "I’m a developer at ",
+      //      .a(attributes: [.href("https://sveasolar.se/sv-se"), .target(.blank), .class("inline-link")], "Svea Solar"),
+      //      ", where I'm working on the iOS app.",
       "I’m a developer at ",
       .a(attributes: [.href("https://en.wikipedia.org/wiki/Schibsted"), .target(.blank), .class("inline-link")], "Schibsted Marketplaces"),
       ", where I'm working on one of the iOS apps.",
@@ -39,7 +39,14 @@ public let homePage: Node = [
       .a(attributes: [.href("https://github.com/adriansergheev/eden"), .target(.blank)], "Messing around with ScreenTime api (Github)"),
       .br,
       .a(attributes: [.href("https://www.youtube.com/watch?v=rYC-TnKoi40"), .target(.blank)], "Intro to Swift (for functional programmers) (Youtube)"),
-      .br
+      .br,
+      .raw(
+        """
+        <div style="color: red; font-weight: bold;">
+          Raw HTML content here!
+        </div>
+        """
+      )
     )
   )
 ]
