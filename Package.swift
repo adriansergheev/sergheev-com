@@ -34,6 +34,19 @@ let package = Package(
         .product(name: "Ink", package: "ink")
       ],
       swiftSettings: swiftSettings
+//      plugins: ["GenerateSwiftMarkdown"]
+    ),
+    .plugin(
+      name: "GenerateSwiftMarkdown",
+      capability: .command(
+        intent: .custom(
+          verb: "generate-swift-from-markdown",
+          description: "Generate swift files from Markdown"
+        ),
+        permissions: [
+          .writeToPackageDirectory(reason: "This command writes the generated swift code to sources.")
+        ]
+      )
     ),
     .testTarget(
       name: "AppTests",
