@@ -13,8 +13,7 @@ let package = Package(
     .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     .package(url: "https://github.com/pointfreeco/swift-html-vapor", from: "0.5.0"),
-    .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3"),
-    .package(url: "https://github.com/johnsundell/ink.git", from: "0.1.0")
+    .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3")
   ],
   targets: [
     .executableTarget(
@@ -31,17 +30,16 @@ let package = Package(
         .product(name: "NIOPosix", package: "swift-nio"),
         .product(name: "HtmlVaporSupport", package: "swift-html-vapor"),
         .product(name: "VaporRouting", package: "vapor-routing"),
-        .product(name: "Ink", package: "ink")
       ],
       swiftSettings: swiftSettings
-//      plugins: ["GenerateSwiftMarkdown"]
     ),
     .plugin(
       name: "GenerateSwiftMarkdown",
       capability: .command(
         intent: .custom(
           verb: "generate-swift-from-markdown",
-          description: "Generate swift files from Markdown"
+          // https://github.com/JohnSundell/Ink
+          description: "Generate swift files from Markdown with Ink"
         ),
         permissions: [
           .writeToPackageDirectory(reason: "This command writes the generated swift code to sources.")
