@@ -46,7 +46,9 @@ let package = Package(
   ]
 )
 
-var swiftSettings: [SwiftSetting] { [
-  .enableUpcomingFeature("DisableOutwardActorInference"),
-  .enableExperimentalFeature("StrictConcurrency"),
-] }
+var swiftSettings: [SwiftSetting] {
+  [
+    .enableUpcomingFeature("DisableOutwardActorInference"),
+    .enableExperimentalFeature("StrictConcurrency"),
+  ]
+}
