@@ -4,7 +4,7 @@ import HtmlVaporSupport
 public func layout(
   title: String,
   content: Node,
-  footer: Node = [],
+  footer: Node = []
 ) -> Node {
   [
     .doctype,
@@ -30,7 +30,7 @@ public func layout(
 public func postLayout(
   title: String,
   content: Node,
-  backLink: URL,
+  backLink: URL
 ) -> Node {
   layout(
     title: title,
