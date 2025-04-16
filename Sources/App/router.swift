@@ -59,11 +59,16 @@ func postsHandler(
 ) async throws -> AsyncResponseEncodable {
   switch route {
   case let .post(id):
-    let url = request.application.router
-      .url(for: .posts(.post(id)))
+//    let url = request.application.router
+//      .url(for: .posts(.post(id)))
     let home = request.application.router
       .url(for: .home)
-    return "post: \(url), home: \(home)"
+    return postLayout(
+      title: "Playing Guitar in the Semantic Apocalypse",
+      content: .raw(post20250416),
+      backLink: home
+    )
+//    return "post: \(url), home: \(home)"
   }
 }
 
