@@ -53,22 +53,30 @@ func siteHandler(
   }
 }
 
+let posts: [Int: String] = [
+  20250416: post20250416
+]
+
 func postsHandler(
   request: Request,
   route: PostsRoute
 ) async throws -> AsyncResponseEncodable {
   switch route {
   case let .post(id):
-//    let url = request.application.router
-//      .url(for: .posts(.post(id)))
+    let url = request.application.router
+      .url(for: .posts(.post(id)))
     let home = request.application.router
       .url(for: .home)
-    return postLayout(
-      title: "Playing Guitar in the Semantic Apocalypse",
-      content: .raw(post20250416),
-      backLink: home
-    )
-//    return "post: \(url), home: \(home)"
+
+    if let post = posts[id] {
+      return postLayout(
+        title: "Playing Guitar in the Semantic Apocalypse",
+        content: .raw(post),
+        backLink: home
+      )
+    } else {
+      request.logger.debug(.init(stringLiteral: "no post for \(id), \(url)"))
+      return Response(status: .notFound)
+    }
   }
 }
-

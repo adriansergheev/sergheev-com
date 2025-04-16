@@ -11,6 +11,7 @@ body {
     line-height: 1.6;
     margin: 40px;
     padding: 0px;
+    max-width: 744px;
 }
 
 h1,
@@ -123,6 +124,11 @@ figcaption {
     height: 1px;
     background-color: #111;
     margin: 20px 0;
+}
+
+.back-button {
+    cursor: pointer;
+    font-size: inherit;
 }
 
 @media (max-width: 730px) {

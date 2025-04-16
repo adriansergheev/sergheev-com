@@ -6,7 +6,7 @@ public func layout(
   content: Node,
   footer: Node = [],
 ) -> Node {
-  return [
+  [
     .doctype,
     .html(
       .head(
@@ -38,7 +38,7 @@ public func postLayout(
     footer: [
       .footer(
         .a(
-          attributes: [.href(backLink.absoluteString),.target(.blank), .class("back-button")],
+          attributes: [.href(backLink.absoluteString), .class("back-button")],
           "← Back to Homepage"
         )
       )
