@@ -1,5 +1,5 @@
 {
-  "originHash" : "7df90613b106417bae47762956527f91e85eec530476e74832ce968dd528b85e",
+  "originHash" : "4d86c4f40f1d89cc1d900e4ef038b0b6578428c61cac1c4f9c9308f54921e93f",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "9c24ac496c97cfb49c1bd5e7162008bb50abafc8",
         "version" : "4.14.2"
-      }
-    },
-    {
-      "identity" : "ink",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/johnsundell/ink.git",
-      "state" : {
-        "revision" : "bcc9f219900a62c4210e6db726035d7f03ae757b",
-        "version" : "0.6.0"
       }
     },
     {
