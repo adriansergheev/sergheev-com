@@ -76,7 +76,7 @@ func postsHandler(
       )
     } else {
       request.logger.debug(.init(stringLiteral: "no post for \(id), \(url)"))
-      return Response(status: .notFound)
+      throw Abort(.notFound)
     }
   }
 }
