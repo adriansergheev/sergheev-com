@@ -31,15 +31,21 @@ let package = Package(
         .product(name: "HtmlVaporSupport", package: "swift-html-vapor"),
         .product(name: "VaporRouting", package: "vapor-routing"),
       ],
-      swiftSettings: swiftSettings,
-      plugins: ["MarkdownHTML"]
+      swiftSettings: swiftSettings
     ),
     .plugin(
-      name: "MarkdownHTML",
-      capability: .buildTool(),
-      dependencies: ["MarkdownHTMLExec"]
+      name: "GenerateSwiftMarkdown",
+      capability: .command(
+        intent: .custom(
+          verb: "generate-swift-from-markdown",
+          // https://github.com/JohnSundell/Ink
+          description: "Generate swift files from Markdown with Ink"
+        ),
+        permissions: [
+          .writeToPackageDirectory(reason: "This command writes the generated swift code to sources.")
+        ]
+      )
     ),
-    .executableTarget(name: "MarkdownHTMLExec"),
     .testTarget(
       name: "AppTests",
       dependencies: [
