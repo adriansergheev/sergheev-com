@@ -54,7 +54,7 @@ func siteHandler(
 }
 
 let posts: [Int: String] = [
-  20250416: post20250416
+  20250416: Posts.post20250416
 ]
 
 func postsHandler(
