@@ -29,13 +29,14 @@ guard let variableName = input
 else { throw MarkdownHTMLExec.failedToExtractVariableName }
 
 let swiftContent = """
-      // Auto-generated from \(input)
+      // Auto-generated from \(variableName).md
       extension Posts {
-        static let post\(variableName.replacingOccurrences(of: "-", with: "")): String =
+        public static let post\(variableName.replacingOccurrences(of: "-", with: "")) = Post(id: \(variableName), content: 
         \"\"\"
-
+      
         \(outputString)
         \"\"\"
+        )
       }
       """
 try swiftContent.write(toFile: output, atomically: true, encoding: .utf8)
