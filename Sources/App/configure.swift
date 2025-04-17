@@ -16,4 +16,3 @@ public func configure(_ app: Vapor.Application) async throws {
     .eraseToAnyParserPrinter()
   app.mount(router, use: siteHandler)
 }
-
