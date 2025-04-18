@@ -32,7 +32,6 @@ let package = Package(
         .product(name: "HtmlVaporSupport", package: "swift-html-vapor"),
         .product(name: "VaporRouting", package: "vapor-routing"),
       ],
-      swiftSettings: swiftSettings,
       plugins: ["MarkdownHTML"]
     ),
     .plugin(
@@ -51,15 +50,7 @@ let package = Package(
       dependencies: [
         .target(name: "App"),
         .product(name: "XCTVapor", package: "vapor"),
-      ],
-      swiftSettings: swiftSettings
+      ]
     )
   ]
 )
-
-var swiftSettings: [SwiftSetting] {
-  [
-    .enableUpcomingFeature("DisableOutwardActorInference"),
-    .enableUpcomingFeature("StrictConcurrency"),
-  ]
-}
