@@ -15,19 +15,15 @@ struct MarkdownHTML: BuildToolPlugin {
       throw MarkdownHTMLError.failedToReadInputDirectory
     }
 
-    return try target.sourceFiles(withSuffix: "md").map { file  in
+    return try target.sourceFiles(withSuffix: "md").map { file in
       let base = file.path.stem
       let input = file.path
       let output = context.pluginWorkDirectory.appending(["\(base).swift"])
 
-      // https://github.com/JohnSundell/Ink
-      let thirdPartyExecutablePath: String = context.package.directory
-        .appending(["Plugins", "MarkdownHTML", "ink"]).string
-
       return .buildCommand(
         displayName: "Generating HTML from Markdown \(base)",
         executable: try context.tool(named: "MarkdownHTMLExec").path,
-        arguments: [input.string, output.string, thirdPartyExecutablePath],
+        arguments: [input.string, output.string],
         inputFiles: [input],
         outputFiles: [output]
       )

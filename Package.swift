@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
@@ -13,7 +13,8 @@ let package = Package(
     .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     .package(url: "https://github.com/pointfreeco/swift-html-vapor", from: "0.5.0"),
-    .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3")
+    .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3"),
+    .package(url: "https://github.com/JohnSundell/Ink", exact: "0.6.0")
   ],
   targets: [
     .executableTarget(
@@ -39,7 +40,12 @@ let package = Package(
       capability: .buildTool(),
       dependencies: ["MarkdownHTMLExec"]
     ),
-    .executableTarget(name: "MarkdownHTMLExec"),
+    .executableTarget(
+      name: "MarkdownHTMLExec",
+      dependencies: [
+        .product(name: "Ink", package: "Ink")
+      ]
+    ),
     .testTarget(
       name: "AppTests",
       dependencies: [

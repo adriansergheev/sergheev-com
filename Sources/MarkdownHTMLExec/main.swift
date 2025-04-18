@@ -1,42 +1,38 @@
 import Foundation
+import Ink
 
 let fileManager = FileManager.default
 let arguments = ProcessInfo().arguments
 let (input, output) = (arguments[1], arguments[2])
-let thirdPartyExecutablePath = arguments[3]
 
-let process = Process()
-process.executableURL = URL(fileURLWithPath: thirdPartyExecutablePath)
-process.arguments = [input]
-let outputPipe = Pipe()
-process.standardOutput = outputPipe
-try process.run()
-process.waitUntilExit()
+let markdown = try String(contentsOfFile: input)
+let parser = MarkdownParser()
+let html = parser.html(from: markdown)
 
 enum MarkdownHTMLExec: Error {
-  case failedToReadOutput
   case failedToExtractVariableName
 }
 
-guard let outputData = try outputPipe.fileHandleForReading.readToEnd(),
-      let outputString = String(data: outputData, encoding: .utf8)
-else { throw MarkdownHTMLExec.failedToReadOutput }
-
-guard let variableName = input
+guard let postIdString = input
   .replacingOccurrences(of: ".md", with: "")
+  .replacingOccurrences(of: "-", with: "")
   .components(separatedBy: "/")
   .last
 else { throw MarkdownHTMLExec.failedToExtractVariableName }
 
-let swiftContent = """
-      // Auto-generated from \(variableName).md
+// converts files with names which can be converted to an integer
+// ignores other files
+if let postId = Int(postIdString) {
+  let swiftContent = """
+      // Auto-generated from \(postId).md
       extension Posts {
-        public static let post\(variableName.replacingOccurrences(of: "-", with: "")) = Post(id: \(variableName), content: 
+        public static let post\(postId) = Post(id: \(postId), content: 
         \"\"\"
       
-        \(outputString)
+        \(html)
         \"\"\"
         )
       }
       """
-try swiftContent.write(toFile: output, atomically: true, encoding: .utf8)
+  try swiftContent.write(toFile: output, atomically: true, encoding: .utf8)
+}
