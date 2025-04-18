@@ -16,7 +16,7 @@ public func layout(
         .script(attributes: [
           .defer(true),
           .data("domain", "sergheev.com"),
-          .src("http://plausible.sergheev.com/js/script.js")
+          .src("https://plausible.sergheev.com/js/script.js")
         ])
       ),
       .body(
