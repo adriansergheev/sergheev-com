@@ -1,17 +1,21 @@
 import Foundation
 import Ink
 
+enum MarkdownHTMLExec: Error {
+  case failedToExtractVariableName
+  case insufficientArguments
+}
+
 let fileManager = FileManager.default
 let arguments = ProcessInfo().arguments
+if arguments.count < 3 {
+  throw MarkdownHTMLExec.insufficientArguments
+}
 let (input, output) = (arguments[1], arguments[2])
 
 let markdown = try String(contentsOfFile: input)
 let parser = MarkdownParser()
 let html = parser.html(from: markdown)
-
-enum MarkdownHTMLExec: Error {
-  case failedToExtractVariableName
-}
 
 guard let postIdString = input
   .replacingOccurrences(of: ".md", with: "")
@@ -20,15 +24,14 @@ guard let postIdString = input
   .last
 else { throw MarkdownHTMLExec.failedToExtractVariableName }
 
-// converts files with names which can be converted to an integer
-// ignores other files
+// N.B: converts ids which can be converted to integers, ignores everything else
 if let postId = Int(postIdString) {
   let swiftContent = """
       // Auto-generated from \(postId).md
       extension Posts {
-        public static let post\(postId) = Post(id: \(postId), content: 
+        public static let post\(postId) = Post(id: \(postId), content:
         \"\"\"
-      
+
         \(html)
         \"\"\"
         )
