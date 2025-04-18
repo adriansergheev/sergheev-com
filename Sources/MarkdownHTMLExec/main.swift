@@ -7,7 +7,7 @@ enum MarkdownHTMLExec: Error {
 }
 
 let fileManager = FileManager.default
-let arguments = ProcessInfo().arguments
+let arguments = ProcessInfo.processInfo.arguments
 if arguments.count < 3 {
   throw MarkdownHTMLExec.insufficientArguments
 }
@@ -37,5 +37,5 @@ if let postId = Int(postIdString) {
         )
       }
       """
-  try swiftContent.write(toFile: output, atomically: true, encoding: .utf8)
+  try swiftContent.write(toFile: output, atomically: true, encoding: String.Encoding.utf8)
 }
