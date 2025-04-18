@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
@@ -13,7 +13,8 @@ let package = Package(
     .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     .package(url: "https://github.com/pointfreeco/swift-html-vapor", from: "0.5.0"),
-    .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3")
+    .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3"),
+    .package(url: "https://github.com/JohnSundell/Ink", exact: "0.6.0")
   ],
   targets: [
     .executableTarget(
@@ -31,20 +32,19 @@ let package = Package(
         .product(name: "HtmlVaporSupport", package: "swift-html-vapor"),
         .product(name: "VaporRouting", package: "vapor-routing"),
       ],
-      swiftSettings: swiftSettings
+      swiftSettings: swiftSettings,
+      plugins: ["MarkdownHTML"]
     ),
     .plugin(
-      name: "GenerateSwiftMarkdown",
-      capability: .command(
-        intent: .custom(
-          verb: "generate-swift-from-markdown",
-          // https://github.com/JohnSundell/Ink
-          description: "Generate swift files from Markdown with Ink"
-        ),
-        permissions: [
-          .writeToPackageDirectory(reason: "This command writes the generated swift code to sources.")
-        ]
-      )
+      name: "MarkdownHTML",
+      capability: .buildTool(),
+      dependencies: ["MarkdownHTMLExec"]
+    ),
+    .executableTarget(
+      name: "MarkdownHTMLExec",
+      dependencies: [
+        .product(name: "Ink", package: "Ink")
+      ]
     ),
     .testTarget(
       name: "AppTests",
@@ -60,6 +60,6 @@ let package = Package(
 var swiftSettings: [SwiftSetting] {
   [
     .enableUpcomingFeature("DisableOutwardActorInference"),
-    .enableExperimentalFeature("StrictConcurrency"),
+    .enableUpcomingFeature("StrictConcurrency"),
   ]
 }
