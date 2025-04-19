@@ -31,10 +31,8 @@ if let postId = Int(postIdString) {
       extension Posts {
         public static let post\(postId) = Post(id: \(postId), content:
         \"\"\"
-
-        \(html)
-        \"\"\"
-        )
+        \(html.replacingOccurrences(of: "\\(", with: "\\\\("))
+      \"\"\")
       }
       """
   try swiftContent.write(toFile: output, atomically: true, encoding: String.Encoding.utf8)
