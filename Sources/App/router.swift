@@ -45,17 +45,20 @@ func siteHandler(
 ) async throws -> AsyncResponseEncodable {
   switch route {
   case .home:
-    return layout(title: "home", content: homePage)
+    let posts = posts.map { key, value in (key, value.0)}
+    return layout(
+      title: "home",
+      content: homePage(
+        posts: posts,
+        urlForPostId: { id in request.application.router.url(for: .posts(.post(id))) }
+      )
+    )
   case .photoGuessrAppStore:
     return request.fileio.streamFile(at: "Public/photoguessr-appstore.html")
   case let .posts(route):
     return try await postsHandler(request: request, route: route)
   }
 }
-
-let posts: [Int: String] = [
-  Posts.post20250416.id: Posts.post20250416.content
-]
 
 func postsHandler(
   request: Request,
@@ -70,8 +73,8 @@ func postsHandler(
 
     if let post = posts[id] {
       return postLayout(
-        title: "Playing Guitar in the Semantic Apocalypse",
-        content: .raw(post),
+        title: post.0,
+        content: .raw(post.1),
         backLink: home
       )
     } else {
