@@ -45,7 +45,7 @@ func siteHandler(
 ) async throws -> AsyncResponseEncodable {
   switch route {
   case .home:
-    let posts = posts.map { key, value in (key, value.0)}
+    let posts = posts.reversed().map { key, value in (key, value.0)}
     return layout(
       title: "home",
       content: homePage(
