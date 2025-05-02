@@ -1,5 +1,5 @@
 import Foundation
-@preconcurrency import HtmlVaporSupport
+import HtmlVaporSupport
 
 // https://www.darioamodei.com/privacy-policy
 public func privacyPolicy() -> Node {

@@ -1,5 +1,5 @@
 import Foundation
-@preconcurrency import HtmlVaporSupport
+import HtmlVaporSupport
 
 public func homePage(posts: [(Int, String)], urlForPostId: (Int) -> URL) -> Node {
   var postsNode: Node {

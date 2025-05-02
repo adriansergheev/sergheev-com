@@ -1,5 +1,5 @@
 import Vapor
-@preconcurrency import VaporRouting
+import VaporRouting
 
 public func configure(_ app: Vapor.Application) async throws {
   app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
