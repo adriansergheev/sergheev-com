@@ -27,7 +27,7 @@ public func layout(
   ]
 }
 
-public func postLayout(
+public func backLinkLayout(
   title: String,
   content: Node,
   backLink: URL
