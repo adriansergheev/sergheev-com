@@ -23,10 +23,10 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
         .strong("Posts:"),
         .br,
         posts,
-//        .br,
-//        .a(attributes: [.href(router.url(for: .subscribe).absoluteString), .target(.blank)], "Subscribe"),
-//        " for email alerts about new posts.",
-//        .br,
+        .br,
+        .a(attributes: [.href(router.url(for: .subscribe).absoluteString), .target(.blank)], "Subscribe"),
+        " for email alerts about new posts.",
+        .br,
         .br
       ]
     }

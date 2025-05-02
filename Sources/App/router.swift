@@ -92,11 +92,16 @@ func siteHandler(
       content: privacyPolicy()
     )
   case .subscribe:
+    @Dependency(\.mail) var mail
     if request.method == .POST {
       let formData = try request.content.decode(SiteRoute.SubscribeData.self)
-      // TODO: mailgun
-      print(formData)
-      return "👍 subscribed"
+      do {
+        try await mail.client.addContact(contact: .init(email: formData.email))
+        return layout(title: "subscribed", content: "👍", backButton: true)
+      } catch {
+        request.logger.error("Failed to subscribe: \(error)")
+        throw Abort(.internalServerError)
+      }
     }
     return layout(
       title: "subscribe",
