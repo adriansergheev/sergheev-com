@@ -39,5 +39,5 @@ jobs:
               sudo docker tag image sergheev-com-amd64:latest
               sudo docker stop vapor || true
               sudo docker rm vapor || true
-              sudo docker run --restart unless-stopped -d --name vapor -p 8080:8080 sergheev-com-amd64:latest
+              sudo docker run --restart unless-stopped -d --name vapor -p 8080:8080 -e MAIL_API_KEY=${{ secrets.MAIL_API_KEY }} sergheev-com-amd64:latest
               sudo docker system prune -f
