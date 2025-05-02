@@ -5,8 +5,8 @@ import Html
 
 let homeString = Html.render(
   layout(
-    title: "home",
-    content: homePage([])
+    title: "subscribe",
+    content: subscribe()
   )
 )
 let webView = WKWebView(frame: .init(x: 0, y: 0, width: 832, height: 750))

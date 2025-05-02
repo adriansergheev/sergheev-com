@@ -1,12 +1,21 @@
 import Foundation
+import Dependencies
 import HtmlVaporSupport
 
 public func layout(
   title: String,
   content: Node,
-  footer: Node = []
+  backButton: Bool = true
 ) -> Node {
-  [
+  @Dependency(\.siteRouter) var router
+  let footer = Node.footer(
+    .div(attributes: [.class("divider")]),
+    .a(
+      attributes: [.href(router.url(for: .home).absoluteString), .class("back-button")],
+      "← Back to Homepage"
+    )
+  )
+  return [
     .doctype,
     .html(
       .head(
@@ -21,27 +30,10 @@ public func layout(
       ),
       .body(
         .main(content),
-        footer
+        backButton
+        ? footer
+        : []
       )
     )
   ]
-}
-
-public func backLinkLayout(
-  title: String,
-  content: Node,
-  backLink: URL
-) -> Node {
-  layout(
-    title: title,
-    content: content,
-    footer: [
-      .footer(
-        .a(
-          attributes: [.href(backLink.absoluteString), .class("back-button")],
-          "← Back to Homepage"
-        )
-      )
-    ]
-  )
 }

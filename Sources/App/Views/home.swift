@@ -1,10 +1,12 @@
 import Foundation
-@preconcurrency import HtmlVaporSupport
+import HtmlVaporSupport
+import Dependencies
 
-public func homePage(posts: [(Int, String)], urlForPostId: (Int) -> URL) -> Node {
+public func homePage(_ posts: [(Int, String)]) -> Node {
   var postsNode: Node {
+    @Dependency(\.siteRouter) var router
     let posts: Node = posts.map { post in
-      let url = urlForPostId(post.0).absoluteString
+      let url = router.url(for: .posts(.post(post.0))).absoluteString
       return [Node.a(attributes: [.href(url), .target(.blank)], "\(post.1)"), .br]
     }.reduce(into: Node.fragment([])) { partialResult, node in
       switch partialResult {
@@ -18,9 +20,13 @@ public func homePage(posts: [(Int, String)], urlForPostId: (Int) -> URL) -> Node
       return ""
     } else {
       return [
-        "Posts:",
+        .strong("Posts:"),
         .br,
         posts,
+//        .br,
+//        .a(attributes: [.href(router.url(for: .subscribe).absoluteString), .target(.blank)], "Subscribe"),
+//        " for email alerts about new posts.",
+//        .br,
         .br
       ]
     }
@@ -54,7 +60,7 @@ public func homePage(posts: [(Int, String)], urlForPostId: (Int) -> URL) -> Node
       .div(attributes: [.class("divider")]),
       .p(
         postsNode,
-        "Links:",
+        .strong("Links:"),
         .br,
         .a(attributes: [.href("https://github.com/adriansergheev/photoguessr"), .target(.blank)], "GeoGuessr - but for photos (Github)"),
         .br,
