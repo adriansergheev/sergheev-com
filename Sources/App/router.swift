@@ -12,9 +12,7 @@ extension DependencyValues {
 extension SiteRouter: DependencyKey {
   static let liveValue = SiteRouter()
 }
-extension SiteRouter: TestDependencyKey {
-  static let testValue = SiteRouter()
-}
+
 typealias Router<Output> = ParserPrinter<URLRequestData, Output>
 
 struct SiteRouter: ParserPrinter {
@@ -84,7 +82,10 @@ func siteHandler(
   case .photoGuessrAppStore:
     return request.fileio.streamFile(at: "Public/photoguessr-appstore.html")
   case let .posts(route):
-    return try await postsHandler(request: request, route: route)
+    return try await postsHandler(
+      request: request,
+      route: route
+    )
   case .privacyPolicy:
     return layout(
       title: "privacy policy",

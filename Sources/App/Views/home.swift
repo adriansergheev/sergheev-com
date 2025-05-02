@@ -4,8 +4,8 @@ import Dependencies
 
 public func homePage(_ posts: [(Int, String)]) -> Node {
   var postsNode: Node {
+    @Dependency(\.siteRouter) var router
     let posts: Node = posts.map { post in
-      @Dependency(\.siteRouter) var router
       let url = router.url(for: .posts(.post(post.0))).absoluteString
       return [Node.a(attributes: [.href(url), .target(.blank)], "\(post.1)"), .br]
     }.reduce(into: Node.fragment([])) { partialResult, node in
@@ -20,9 +20,13 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
       return ""
     } else {
       return [
-        "Posts:",
+        .strong("Posts:"),
         .br,
         posts,
+        .br,
+        .a(attributes: [.href(router.url(for: .subscribe).absoluteString), .target(.blank)], "Subscribe"),
+        " for email alerts about new posts.",
+        .br,
         .br
       ]
     }
@@ -56,7 +60,7 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
       .div(attributes: [.class("divider")]),
       .p(
         postsNode,
-        "Links:",
+        .strong("Links:"),
         .br,
         .a(attributes: [.href("https://github.com/adriansergheev/photoguessr"), .target(.blank)], "GeoGuessr - but for photos (Github)"),
         .br,
