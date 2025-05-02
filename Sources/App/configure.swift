@@ -1,7 +1,18 @@
 import Vapor
-import VaporRouting
+@preconcurrency import VaporRouting
+import Dependencies
 
+enum SiteRouterKey: StorageKey {
+  typealias Value = AnyParserPrinter<URLRequestData, SiteRoute>
+}
+extension Application {
+  var router: SiteRouterKey.Value {
+    get { self.storage[SiteRouterKey.self]!}
+    set { self.storage[SiteRouterKey.self] = newValue }
+  }
+}
 public func configure(_ app: Vapor.Application) async throws {
+  @Dependency(\.siteRouter) var siteRouter
   app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
   var baseURL: String {
     switch app.environment {
@@ -11,8 +22,8 @@ public func configure(_ app: Vapor.Application) async throws {
       "https://www.sergheev.com"
     }
   }
-  app.router = router
+  app.router = siteRouter
     .baseURL(baseURL)
     .eraseToAnyParserPrinter()
-  app.mount(router, use: siteHandler)
+  app.mount(siteRouter, use: siteHandler)
 }

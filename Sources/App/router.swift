@@ -1,46 +1,52 @@
 import Vapor
 import Foundation
+import Dependencies
 @preconcurrency import VaporRouting
 
-enum SiteRouterKey: StorageKey {
-  typealias Value = AnyParserPrinter<URLRequestData, SiteRoute>
-}
-
-extension Application {
-  var router: SiteRouterKey.Value {
-    get { self.storage[SiteRouterKey.self]!}
-    set { self.storage[SiteRouterKey.self] = newValue }
+extension DependencyValues {
+  var siteRouter: SiteRouter {
+    get { self[SiteRouter.self] }
+    set { self[SiteRouter.self] = newValue }
   }
 }
+extension SiteRouter: DependencyKey {
+  static let liveValue = SiteRouter()
+}
+extension SiteRouter: TestDependencyKey {
+  static let testValue = SiteRouter()
+}
+typealias Router<Output> = ParserPrinter<URLRequestData, Output>
 
-let router = OneOf {
-  Route(.case(SiteRoute.home))
-  Route(.case(SiteRoute.photoGuessrAppStore)) {
-    Path { "photoguessr-appstore" }
-  }
-  Route(.case(SiteRoute.posts)) {
-    Path { "posts" }
-    postsRouter
-  }
-  Route(.case(SiteRoute.privacyPolicy)) {
-    Path { "privacy-policy" }
-  }
-  Route(.case(SiteRoute.subscribe)) {
-    Path { "subscribe" }
+struct SiteRouter: ParserPrinter {
+  var body: some Router<SiteRoute> {
     OneOf {
-      Parse {
-        Method.post
+      Route(.case(SiteRoute.home))
+      Route(.case(SiteRoute.photoGuessrAppStore)) {
+        Path { "photoguessr-appstore" }
       }
-      Parse {
-        Method.get
+      Route(.case(SiteRoute.posts)) {
+        Path { "posts" }
+        OneOf {
+          Route(.case(PostsRoute.post)) {
+            Path { Digits() }
+          }
+        }
+      }
+      Route(.case(SiteRoute.privacyPolicy)) {
+        Path { "privacy-policy" }
+      }
+      Route(.case(SiteRoute.subscribe)) {
+        Path { "subscribe" }
+        OneOf {
+          Parse {
+            Method.post
+          }
+          Parse {
+            Method.get
+          }
+        }
       }
     }
-  }
-}
-
-let postsRouter = OneOf {
-  Route(.case(PostsRoute.post)) {
-    Path { Digits() }
   }
 }
 
@@ -66,35 +72,34 @@ func siteHandler(
 ) async throws -> AsyncResponseEncodable {
   switch route {
   case .home:
-    let posts = posts.reversed().map { key, value in (key, value.0)}
+    let posts = posts
+      .map { key, value in (key, value.0)}
+      .sorted { first, second in first.0 > second.0 }
+
     return layout(
       title: "home",
-      content: homePage(
-        posts: posts,
-        urlForPostId: { id in request.application.router.url(for: .posts(.post(id))) }
-      )
+      content: homePage(posts),
+      backButton: false
     )
   case .photoGuessrAppStore:
     return request.fileio.streamFile(at: "Public/photoguessr-appstore.html")
   case let .posts(route):
     return try await postsHandler(request: request, route: route)
   case .privacyPolicy:
-    return backLinkLayout(
+    return layout(
       title: "privacy policy",
-      content: privacyPolicy(),
-      backLink: request.application.router.url(for: .home)
+      content: privacyPolicy()
     )
   case .subscribe:
     if request.method == .POST {
       let formData = try request.content.decode(SiteRoute.SubscribeData.self)
-      //TODO: mailgun
+      // TODO: mailgun
       print(formData)
       return "👍 subscribed"
     }
-    return backLinkLayout(
+    return layout(
       title: "subscribe",
-      content: subscribe(),
-      backLink: request.application.router.url(for: .home)
+      content: subscribe()
     )
   }
 }
@@ -105,16 +110,12 @@ func postsHandler(
 ) async throws -> AsyncResponseEncodable {
   switch route {
   case let .post(id):
-    let url = request.application.router
-      .url(for: .posts(.post(id)))
-    let home = request.application.router
-      .url(for: .home)
-
+    @Dependency(\.siteRouter) var router
+    let url = router.url(for: .posts(.post(id)))
     if let post = posts[id] {
-      return backLinkLayout(
+      return layout(
         title: post.0,
-        content: .raw(post.1),
-        backLink: home
+        content: .raw(post.1)
       )
     } else {
       request.logger.debug(.init(stringLiteral: "no post for \(id), \(url)"))

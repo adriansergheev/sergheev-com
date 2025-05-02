@@ -47,4 +47,3 @@ public func privacyPolicy() -> Node {
     )
   )
 }
-

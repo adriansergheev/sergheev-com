@@ -1,10 +1,12 @@
 import Foundation
 import HtmlVaporSupport
+import Dependencies
 
-public func homePage(posts: [(Int, String)], urlForPostId: (Int) -> URL) -> Node {
+public func homePage(_ posts: [(Int, String)]) -> Node {
   var postsNode: Node {
     let posts: Node = posts.map { post in
-      let url = urlForPostId(post.0).absoluteString
+      @Dependency(\.siteRouter) var router
+      let url = router.url(for: .posts(.post(post.0))).absoluteString
       return [Node.a(attributes: [.href(url), .target(.blank)], "\(post.1)"), .br]
     }.reduce(into: Node.fragment([])) { partialResult, node in
       switch partialResult {

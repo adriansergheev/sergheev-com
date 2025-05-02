@@ -14,7 +14,8 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     .package(url: "https://github.com/pointfreeco/swift-html-vapor", from: "0.5.0"),
     .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3"),
-    .package(url: "https://github.com/JohnSundell/Ink", exact: "0.6.0")
+    .package(url: "https://github.com/JohnSundell/Ink", exact: "0.6.0"),
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2")
   ],
   targets: [
     .executableTarget(
@@ -31,6 +32,7 @@ let package = Package(
         .product(name: "NIOPosix", package: "swift-nio"),
         .product(name: "HtmlVaporSupport", package: "swift-html-vapor"),
         .product(name: "VaporRouting", package: "vapor-routing"),
+        .product(name: "Dependencies", package: "swift-dependencies")
       ],
       plugins: ["MarkdownHTML"]
     ),
