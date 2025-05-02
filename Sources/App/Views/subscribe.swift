@@ -1,16 +1,18 @@
 import Foundation
 import HtmlVaporSupport
+import Dependencies
 
 public func subscribe() -> Node {
+  @Dependency(\.siteRouter) var router
   return [
-    .form(
-      attributes: [
-        .action("/subscribe"),
-        .method(.post)
-      ],
-      .div(
-        .label(attributes: [.for("email")], "Subscribe for email alerts"),
-        .br,
+    .h2("Subscribe for email alerts"),
+    .section(
+      attributes: [.class("subscribe")],
+      .form(
+        attributes: [
+          .action(router.path(for: .subscribe)),
+          .method(.post)
+        ],
         .input(
           attributes: [
             .type(.email),
@@ -20,14 +22,21 @@ public func subscribe() -> Node {
             .required(true)
           ]
         ),
-        .br,
         .input(
           attributes: [
             .type(.submit),
             .value("Subscribe")
           ]
         ),
-        .br
+        .br,
+        .a(
+          attributes: [
+            .class("privacy-link"),
+            .href(router.url(for: .privacyPolicy).absoluteString),
+            .target(.blank), .class("inline-link")
+          ],
+          "Privacy Policy"
+        )
       )
     )
   ]

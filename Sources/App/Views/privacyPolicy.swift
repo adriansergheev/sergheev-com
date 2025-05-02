@@ -4,7 +4,6 @@ import HtmlVaporSupport
 // https://www.darioamodei.com/privacy-policy
 public func privacyPolicy() -> Node {
   .div(
-    attributes: [.class("box")],
     .h1("Privacy Policy"),
     .p(
       "I respect your privacy and aim to collect minimal personal information."

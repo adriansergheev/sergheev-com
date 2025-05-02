@@ -1,4 +1,4 @@
-// https://ai-2027.com  
+// https://ai-2027.com
 let indexCSS: StaticString = """
 html {
     font-size: 15px;
@@ -128,6 +128,44 @@ figcaption {
 
 .back-button {
     cursor: pointer;
+    font-size: inherit;
+}
+
+/* ---------- Subscribe form ---------- */
+.subscribe form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1.5rem;
+    max-width: 480px;
+}
+
+.subscribe input[type="email"] {
+    flex: 1 1 240px;
+    padding: 0.6rem 0.9rem;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.subscribe input[type="submit"] {
+    padding: 0.6rem 1.2rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 6px;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.subscribe input[type="submit"]:hover {
+    background: #333;
+}
+
+.subscribe .privacy-link {
+    flex: 0 0 100%;
     font-size: inherit;
 }
 

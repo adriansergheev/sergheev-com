@@ -9,6 +9,7 @@ public func layout(
 ) -> Node {
   @Dependency(\.siteRouter) var router
   let footer = Node.footer(
+    .div(attributes: [.class("divider")]),
     .a(
       attributes: [.href(router.url(for: .home).absoluteString), .class("back-button")],
       "← Back to Homepage"
@@ -31,7 +32,7 @@ public func layout(
         .main(content),
         backButton
         ? footer
-        : Node()
+        : []
       )
     )
   ]
