@@ -1,4 +1,5 @@
 import Vapor
+import Foundation
 @preconcurrency import VaporRouting
 
 enum SiteRouterKey: StorageKey {
@@ -24,6 +25,17 @@ let router = OneOf {
   Route(.case(SiteRoute.privacyPolicy)) {
     Path { "privacy-policy" }
   }
+  Route(.case(SiteRoute.subscribe)) {
+    Path { "subscribe" }
+    OneOf {
+      Parse {
+        Method.post
+      }
+      Parse {
+        Method.get
+      }
+    }
+  }
 }
 
 let postsRouter = OneOf {
@@ -37,6 +49,11 @@ enum SiteRoute {
   case photoGuessrAppStore
   case posts(PostsRoute)
   case privacyPolicy
+  case subscribe
+
+  struct SubscribeData: Codable {
+    let email: String
+  }
 }
 
 enum PostsRoute {
@@ -65,6 +82,18 @@ func siteHandler(
     return backLinkLayout(
       title: "privacy policy",
       content: privacyPolicy(),
+      backLink: request.application.router.url(for: .home)
+    )
+  case .subscribe:
+    if request.method == .POST {
+      let formData = try request.content.decode(SiteRoute.SubscribeData.self)
+      //TODO: mailgun
+      print(formData)
+      return "👍 subscribed"
+    }
+    return backLinkLayout(
+      title: "subscribe",
+      content: subscribe(),
       backLink: request.application.router.url(for: .home)
     )
   }
