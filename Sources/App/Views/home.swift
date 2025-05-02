@@ -27,7 +27,6 @@ public func homePage(posts: [(Int, String)], urlForPostId: (Int) -> URL) -> Node
   }
   return [
     .div(
-      attributes: [.class("box")],
       .h1("Adrian Sergheev"),
       .p(
         "I’m a developer at ",

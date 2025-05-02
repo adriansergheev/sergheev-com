@@ -21,6 +21,9 @@ let router = OneOf {
     Path { "posts" }
     postsRouter
   }
+  Route(.case(SiteRoute.privacyPolicy)) {
+    Path { "privacy-policy" }
+  }
 }
 
 let postsRouter = OneOf {
@@ -33,6 +36,7 @@ enum SiteRoute {
   case home
   case photoGuessrAppStore
   case posts(PostsRoute)
+  case privacyPolicy
 }
 
 enum PostsRoute {
@@ -57,6 +61,12 @@ func siteHandler(
     return request.fileio.streamFile(at: "Public/photoguessr-appstore.html")
   case let .posts(route):
     return try await postsHandler(request: request, route: route)
+  case .privacyPolicy:
+    return backLinkLayout(
+      title: "privacy policy",
+      content: privacyPolicy(),
+      backLink: request.application.router.url(for: .home)
+    )
   }
 }
 
@@ -72,7 +82,7 @@ func postsHandler(
       .url(for: .home)
 
     if let post = posts[id] {
-      return postLayout(
+      return backLinkLayout(
         title: post.0,
         content: .raw(post.1),
         backLink: home
