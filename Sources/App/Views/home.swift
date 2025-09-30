@@ -35,9 +35,7 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
     .div(
       .h1("Adrian Sergheev"),
       .p(
-        "I’m a developer at ",
-        .a(attributes: [.href("https://sveasolar.se/sv-se"), .target(.blank), .class("inline-link")], "Svea Solar"),
-        ", where I'm working on their iOS app.",
+        "I’m a iOS developer.",
         .br,
         .br,
         "When I'm not writing code, I typically enjoy training ",
