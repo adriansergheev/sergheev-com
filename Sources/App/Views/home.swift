@@ -51,8 +51,6 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
         .br,
         "Feel free to contact me at ",
         .a(attributes: [.href("mailto:contact@sergheev.com")], "contact@sergheev.com"),
-        ", or on ",
-        .a(attributes: [.href("https://x.com/adriansergheev"), .target(.blank)], "Twitter"),
         "."
       ),
       .div(attributes: [.class("divider")]),
