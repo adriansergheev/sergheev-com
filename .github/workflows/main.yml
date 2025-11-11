@@ -1,4 +1,4 @@
-name: deploy to ec2
+name: deploy to hosting
 
 on:
   push:
@@ -14,30 +14,30 @@ jobs:
       - name: setup buildx
         uses: docker/setup-buildx-action@v3.3.0
       - name: build docker image
-        run: docker buildx build --platform linux/amd64 -t image:latest --load .
+        run: docker buildx build --platform linux/arm64 -t image:latest --load .
       - name: save image to a file
-        run: docker save image:latest -o sergheev-com-amd64.tar
+        run: docker save image:latest -o sergheev-com-arm64.tar
       - name: set file permissions
-        run: chmod 644 sergheev-com-amd64.tar
+        run: chmod 644 sergheev-com-arm64.tar
       - name: copy files to ec2 
         uses: appleboy/scp-action@v0.1.7
         with: 
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_KEY }}
-          source: "sergheev-com-amd64.tar"
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "sergheev-com-arm64.tar"
           target: "~/docker/"
       - name: deploy container to ec2
         uses: appleboy/ssh-action@v1.0.3
         with: 
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
           script: |
-              sudo docker load -i ~/docker/sergheev-com-amd64.tar
-              sudo docker tag sergheev-com-amd64:latest sergheev-com-amd64:previous
-              sudo docker tag image sergheev-com-amd64:latest
+              sudo docker load -i ~/docker/sergheev-com-arm64.tar
+              sudo docker tag sergheev-com-arm64:latest sergheev-com-arm64:previous
+              sudo docker tag image sergheev-com-arm64:latest
               sudo docker stop vapor || true
               sudo docker rm vapor || true
-              sudo docker run --restart unless-stopped -d --name vapor -p 8080:8080 -e MAIL_API_KEY=${{ secrets.MAIL_API_KEY }} sergheev-com-amd64:latest
+              sudo docker run --restart unless-stopped -d --name vapor -p 8080:8080 -e MAIL_API_KEY=${{ secrets.MAIL_API_KEY }} sergheev-com-arm64:latest
               sudo docker system prune -f
