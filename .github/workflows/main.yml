@@ -19,7 +19,7 @@ jobs:
         run: docker save image:latest -o sergheev-com-arm64.tar
       - name: set file permissions
         run: chmod 644 sergheev-com-arm64.tar
-      - name: copy files to ec2 
+      - name: copy files
         uses: appleboy/scp-action@v0.1.7
         with: 
           host: ${{ secrets.HOST }}
@@ -27,7 +27,7 @@ jobs:
           key: ${{ secrets.KEY }}
           source: "sergheev-com-arm64.tar"
           target: "~/docker/"
-      - name: deploy container to ec2
+      - name: deploy container
         uses: appleboy/ssh-action@v1.0.3
         with: 
           host: ${{ secrets.HOST }}
