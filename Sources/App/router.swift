@@ -121,7 +121,8 @@ func postsHandler(
     if let post = posts[id] {
       return layout(
         title: post.0,
-        content: .raw(post.1)
+        content: .raw(post.1),
+        usePrismJS: true
       )
     } else {
       request.logger.debug(.init(stringLiteral: "no post for \(id), \(url)"))
