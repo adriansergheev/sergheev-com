@@ -6,7 +6,7 @@ public func layout(
   title: String,
   content: Node,
   backButton: Bool = true,
-  usePrismJS: Bool = false,
+  usePrismJS: Bool = false
 ) -> Node {
   @Dependency(\.siteRouter) var router
   let footer = Node.footer(
@@ -27,7 +27,7 @@ public func layout(
           .defer(true),
           .data("domain", "sergheev.com"),
           .src("https://plausible.sergheev.com/js/script.js")
-        ]),
+        ])
       ),
       .body(
         .main(content),
