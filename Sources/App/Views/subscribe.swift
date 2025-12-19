@@ -22,6 +22,13 @@ public func subscribe() -> Node {
             .required(true)
           ]
         ),
+        .input(attributes: [
+          .type(.text),
+          .id("name"),
+          .name("name"),
+          .placeholder("Enter your name"),
+          .style(safe: "position: absolute; left: -99999px;")
+        ]),
         .input(
           attributes: [
             .type(.submit),

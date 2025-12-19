@@ -57,6 +57,13 @@ enum SiteRoute {
 
   struct SubscribeData: Codable {
     let email: String
+    let name: String
+  }
+}
+
+extension SiteRoute.SubscribeData {
+  func isNotBot() -> Bool {
+    name.isEmpty
   }
 }
 
@@ -96,7 +103,9 @@ func siteHandler(
     if request.method == .POST {
       let formData = try request.content.decode(SiteRoute.SubscribeData.self)
       do {
-        try await mail.client.addContact(contact: .init(email: formData.email))
+        if formData.isNotBot() {
+          try await mail.client.addContact(contact: .init(email: formData.email))
+        }
         return layout(title: "subscribed", content: "👍", backButton: true)
       } catch {
         request.logger.error("Failed to subscribe: \(error)")
