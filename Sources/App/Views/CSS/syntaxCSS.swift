@@ -129,4 +129,19 @@ pre code {
     background-color: #87878A;
   }
 }
+pre {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+code {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+pre code {
+    word-wrap: normal;
+    overflow-wrap: normal;
+    white-space: pre;
+}
 """

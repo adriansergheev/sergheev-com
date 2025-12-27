@@ -9,7 +9,7 @@ body {
     background-color: #fffff8;
     color: #111;
     line-height: 1.6;
-    margin: 40px;
+    margin: 20px;
     padding: 0px;
     max-width: 744px;
 }
