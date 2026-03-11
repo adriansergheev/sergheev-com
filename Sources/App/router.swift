@@ -74,7 +74,7 @@ func siteHandler(
   switch route {
   case .home:
     let posts = posts
-      .map { key, value in (key, "\(formattedDate(forPostID: key)) — \(value.title)") }
+      .map { key, value in (key, "\(formattedDate(forPostID: key)) - \(value.title)") }
       .sorted { first, second in first.0 > second.0 }
 
     return layout(
