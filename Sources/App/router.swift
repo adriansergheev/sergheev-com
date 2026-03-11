@@ -19,9 +19,6 @@ struct SiteRouter: ParserPrinter {
   var body: some Router<SiteRoute> {
     OneOf {
       Route(.case(SiteRoute.home))
-      Route(.case(SiteRoute.photoGuessrAppStore)) {
-        Path { "photoguessr-appstore" }
-      }
       Route(.case(SiteRoute.posts)) {
         Path { "posts" }
         OneOf {
@@ -50,7 +47,6 @@ struct SiteRouter: ParserPrinter {
 
 enum SiteRoute {
   case home
-  case photoGuessrAppStore
   case posts(PostsRoute)
   case privacyPolicy
   case subscribe
@@ -86,8 +82,6 @@ func siteHandler(
       content: homePage(posts),
       backButton: false
     )
-  case .photoGuessrAppStore:
-    return request.fileio.streamFile(at: "Public/photoguessr-appstore.html")
   case let .posts(route):
     return try await postsHandler(
       request: request,
