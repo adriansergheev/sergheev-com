@@ -169,6 +169,15 @@ figcaption {
     font-size: inherit;
 }
 
+/* ---------- Section break ---------- */
+.section-break {
+    text-align: center;
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    color: #aaa;
+    margin: 2rem 0;
+}
+
 /* ---------- Screenshot rows ---------- */
 .screenshot-row {
     display: flex;
