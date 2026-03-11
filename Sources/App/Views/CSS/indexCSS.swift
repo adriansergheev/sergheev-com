@@ -169,6 +169,32 @@ figcaption {
     font-size: inherit;
 }
 
+/* ---------- Section break ---------- */
+.section-break {
+    text-align: center;
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    color: #aaa;
+    margin: 2rem 0;
+}
+
+/* ---------- Screenshot rows ---------- */
+.screenshot-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.screenshot-row img {
+    flex: 1 1 0;
+    min-width: 100px;
+    max-width: 200px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
 @media (max-width: 730px) {
 
     dl,
@@ -179,4 +205,5 @@ figcaption {
         line-height: 1.45;
     }
 }
+
 """

@@ -19,9 +19,6 @@ struct SiteRouter: ParserPrinter {
   var body: some Router<SiteRoute> {
     OneOf {
       Route(.case(SiteRoute.home))
-      Route(.case(SiteRoute.photoGuessrAppStore)) {
-        Path { "photoguessr-appstore" }
-      }
       Route(.case(SiteRoute.posts)) {
         Path { "posts" }
         OneOf {
@@ -50,7 +47,6 @@ struct SiteRouter: ParserPrinter {
 
 enum SiteRoute {
   case home
-  case photoGuessrAppStore
   case posts(PostsRoute)
   case privacyPolicy
   case subscribe
@@ -78,7 +74,7 @@ func siteHandler(
   switch route {
   case .home:
     let posts = posts
-      .map { key, value in (key, value.0)}
+      .map { key, value in (key, "\(formattedDate(forPostID: key)) — \(value.title)") }
       .sorted { first, second in first.0 > second.0 }
 
     return layout(
@@ -86,8 +82,6 @@ func siteHandler(
       content: homePage(posts),
       backButton: false
     )
-  case .photoGuessrAppStore:
-    return request.fileio.streamFile(at: "Public/photoguessr-appstore.html")
   case let .posts(route):
     return try await postsHandler(
       request: request,
@@ -119,6 +113,20 @@ func siteHandler(
   }
 }
 
+func formattedDate(forPostID id: Int) -> String {
+  @Dependency(\.calendar) var calendar
+  let s = String(id)
+  guard s.count == 8,
+    let year = Int(s.prefix(4)),
+    let month = Int(s.dropFirst(4).prefix(2)),
+    let day = Int(s.suffix(2)),
+    let date = calendar.date(from: DateComponents(year: year, month: month, day: day))
+  else { return "" }
+  let formatter = DateFormatter()
+  formatter.dateFormat = "MMM d, yyyy"
+  return formatter.string(from: date)
+}
+
 func postsHandler(
   request: Request,
   route: PostsRoute
@@ -129,8 +137,8 @@ func postsHandler(
     let url = router.url(for: .posts(.post(id)))
     if let post = posts[id] {
       return layout(
-        title: post.0,
-        content: .raw(post.1),
+        title: post.title,
+        content: .raw(post.content),
         usePrismJS: true
       )
     } else {

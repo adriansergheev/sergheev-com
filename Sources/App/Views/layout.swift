@@ -9,11 +9,18 @@ public func layout(
   usePrismJS: Bool = false
 ) -> Node {
   @Dependency(\.siteRouter) var router
+  let backButtonNode = Node.a(
+    attributes: [.href(router.url(for: .home).absoluteString), .class("back-button")],
+    "← Back to Homepage"
+  )
   let footer = Node.footer(
     .div(attributes: [.class("divider")]),
-    .a(
-      attributes: [.href(router.url(for: .home).absoluteString), .class("back-button")],
-      "← Back to Homepage"
+    .p(
+      .a(
+        attributes: [.href(router.url(for: .subscribe).absoluteString)],
+        "Subscribe"
+      ),
+      " for email alerts about new posts."
     )
   )
   return [
@@ -30,6 +37,7 @@ public func layout(
         ])
       ),
       .body(
+        backButton ? backButtonNode : [],
         .main(content),
         backButton ? footer : [],
         usePrismJS ? prismJS() : []
