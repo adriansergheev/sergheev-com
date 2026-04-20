@@ -42,7 +42,7 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
         .a(attributes: [.href("https://en.wikipedia.org/wiki/Brazilian_jiu-jitsu"), .target(.blank), .class("inline-link")], "BJJ"),
         ", walking around ",
         .a(attributes: [.href("https://sv.wikipedia.org/wiki/Stora_Nyckelviken"), .target(.blank), .class("inline-link")], "Nyckelviken"),
-        ", or playing guitar.",
+        ", sailing, or playing guitar.",
         .br,
         "Besides that, I'm interested in the ethical implications of AI. I also think people should have the choice to ",
         .a(attributes: [.href("https://en.wikipedia.org/wiki/Life_extension"), .target(.blank), .class("inline-link")], "live longer"),
@@ -57,6 +57,8 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
       .p(
         postsNode,
         .strong("Links:"),
+        .br,
+        .a(attributes: [.href("https://getliminalapp.com"), .target(.blank)], "Liminal - see if your skincare is actually working (iOS)"),
         .br,
         .a(attributes: [.href("https://github.com/adriansergheev/photoguessr"), .target(.blank)], "GeoGuessr - but for photos (Github)"),
         .br,
