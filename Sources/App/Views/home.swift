@@ -67,6 +67,8 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
         .a(attributes: [.href("https://www.youtube.com/watch?v=rYC-TnKoi40"), .target(.blank)], "Intro to Swift (for functional programmers) (Youtube)"),
         .br,
         .a(attributes: [.href("https://github.com/adriansergheev/sergheev-com"), .target(.blank)], "This website, open source and in Swift! (Github)"),
+        .br,
+        .a(attributes: [.href("https://www.linkedin.com/in/sergheevadrian/"), .target(.blank)], "LinkedIn"),
         .br
       )
     )
