@@ -9,12 +9,15 @@ public func layout(
   usePrismJS: Bool = false
 ) -> Node {
   @Dependency(\.siteRouter) var router
-  let backButtonNode = Node.a(
-    attributes: [.href(router.url(for: .home).absoluteString), .class("back-button")],
-    "← Back to Homepage"
+  let backButtonNode = Node.header(
+    attributes: [.class("site-header")],
+    .a(
+      attributes: [.href(router.url(for: .home).absoluteString), .class("back-button")],
+      "← Back to Homepage"
+    )
   )
   let footer = Node.footer(
-    .div(attributes: [.class("divider")]),
+    attributes: [.class("site-footer")],
     .p(
       .a(
         attributes: [.href(router.url(for: .subscribe).absoluteString)],
@@ -30,6 +33,12 @@ public func layout(
         .title(title),
         .style(unsafe: style(usePrismJS: usePrismJS)),
         .meta(viewport: .width(.deviceWidth), .initialScale(1)),
+        .link(attributes: [.rel(.init(rawValue: "preconnect")), .href("https://fonts.googleapis.com")]),
+        .link(attributes: [.rel(.init(rawValue: "preconnect")), .href("https://fonts.gstatic.com"), .init("crossorigin", "")]),
+        .link(attributes: [
+          .rel(.stylesheet),
+          .href("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500&display=swap")
+        ]),
         .script(attributes: [
           .defer(true),
           .data("domain", "sergheev.com"),

@@ -58,6 +58,8 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
         postsNode,
         .strong("Links:"),
         .br,
+        .a(attributes: [.href("/longevity-objections/"), .target(.blank)], "Karl Pfleger's answers to 11 objections to fighting aging"),
+        .br,
         .a(attributes: [.href("https://getliminalapp.com"), .target(.blank)], "Liminal - see if your skincare is actually working (iOS)"),
         .br,
         .a(attributes: [.href("https://github.com/adriansergheev/photoguessr"), .target(.blank)], "GeoGuessr - but for photos (Github)"),
