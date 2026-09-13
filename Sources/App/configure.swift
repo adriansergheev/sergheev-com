@@ -13,7 +13,7 @@ extension Application {
 }
 public func configure(_ app: Vapor.Application) async throws {
   @Dependency(\.siteRouter) var siteRouter
-  app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+  app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory, defaultFile: "index.html", directoryAction: .redirect))
   var baseURL: String {
     switch app.environment {
     case .development, .testing:
