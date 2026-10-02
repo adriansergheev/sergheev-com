@@ -33,17 +33,7 @@ public func layout(
         .title(title),
         .style(unsafe: style(usePrismJS: usePrismJS)),
         .meta(viewport: .width(.deviceWidth), .initialScale(1)),
-        .link(attributes: [.rel(.init(rawValue: "preconnect")), .href("https://fonts.googleapis.com")]),
-        .link(attributes: [.rel(.init(rawValue: "preconnect")), .href("https://fonts.gstatic.com"), .init("crossorigin", "")]),
-        .link(attributes: [
-          .rel(.stylesheet),
-          .href("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500&display=swap")
-        ]),
-        .script(attributes: [
-          .defer(true),
-          .data("domain", "sergheev.com"),
-          .src("https://plausible.sergheev.com/js/script.js")
-        ])
+        fontsAndAnalytics()
       ),
       .body(
         backButton ? backButtonNode : [],
@@ -55,8 +45,25 @@ public func layout(
   ]
 }
 
+func fontsAndAnalytics() -> ChildOf<Tag.Head> {
+  return [
+    .link(attributes: [.rel(.init(rawValue: "preconnect")), .href("https://fonts.googleapis.com")]),
+    .link(attributes: [.rel(.init(rawValue: "preconnect")), .href("https://fonts.gstatic.com"), .init("crossorigin", "")]),
+    .link(attributes: [
+      .rel(.stylesheet),
+      .href("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500&display=swap")
+    ]),
+    .script(attributes: [
+      .defer(true),
+      .data("domain", "sergheev.com"),
+      .src("https://plausible.sergheev.com/js/script.js")
+    ])
+  ]
+}
+
 public func style(usePrismJS: Bool) -> String {
   var style: String = ""
+  style.append(contentsOf: String(describing: tokensCSS))
   style.append(contentsOf: String(describing: indexCSS))
   if usePrismJS {
     style.append(contentsOf: String(describing: syntaxCSS))
