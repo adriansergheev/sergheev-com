@@ -30,6 +30,9 @@ struct SiteRouter: ParserPrinter {
       Route(.case(SiteRoute.privacyPolicy)) {
         Path { "privacy-policy" }
       }
+      Route(.case(SiteRoute.howLongShouldAHumanLive)) {
+        Path { "the-case-against-curing-aging" }
+      }
       Route(.case(SiteRoute.subscribe)) {
         Path { "subscribe" }
         OneOf {
@@ -49,6 +52,7 @@ enum SiteRoute {
   case home
   case posts(PostsRoute)
   case privacyPolicy
+  case howLongShouldAHumanLive
   case subscribe
 
   struct SubscribeData: Codable {
@@ -92,6 +96,8 @@ func siteHandler(
       title: "privacy policy",
       content: privacyPolicy()
     )
+  case .howLongShouldAHumanLive:
+    return howLongPage()
   case .subscribe:
     @Dependency(\.mail) var mail
     if request.method == .POST {

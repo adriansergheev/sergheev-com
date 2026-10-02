@@ -1,4 +1,4 @@
-let indexCSS: StaticString = """
+let tokensCSS: StaticString = """
 :root {
     --bg: #faf8f3;
     --bg-raised: #f2efe6;
@@ -15,6 +15,9 @@ let indexCSS: StaticString = """
     --gutter: clamp(20px, 5vw, 64px);
 }
 
+"""
+
+let indexCSS: StaticString = """
 * {
     box-sizing: border-box;
 }
