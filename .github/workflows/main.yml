@@ -17,7 +17,12 @@ jobs:
         run: docker save image:latest -o sergheev-com-arm64.tar
       - name: set file permissions
         run: chmod 644 sergheev-com-arm64.tar
-      - name: copy files to ec2 
+      - name: connect to tailnet
+        uses: tailscale/github-action@v4
+        with:
+          authkey: ${{ secrets.TS_AUTHKEY }}
+          ping: ${{ secrets.HOST }}
+      - name: copy files to server
         uses: appleboy/scp-action@v0.1.7
         with: 
           host: ${{ secrets.HOST }}
@@ -25,7 +30,7 @@ jobs:
           key: ${{ secrets.KEY }}
           source: "sergheev-com-arm64.tar"
           target: "~/docker/"
-      - name: deploy container to ec2
+      - name: deploy container to server
         uses: appleboy/ssh-action@v1.0.3
         with: 
           host: ${{ secrets.HOST }}
@@ -37,5 +42,5 @@ jobs:
               sudo docker tag image sergheev-com-arm64:latest
               sudo docker stop vapor || true
               sudo docker rm vapor || true
-              sudo docker run --restart unless-stopped -d --name vapor -p 8080:8080 -e MAIL_API_KEY=${{ secrets.MAIL_API_KEY }} sergheev-com-arm64:latest
+              sudo docker run --restart unless-stopped -d --name vapor -p 8080:8080 -e TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} -e TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }} sergheev-com-arm64:latest
               sudo docker system prune -f

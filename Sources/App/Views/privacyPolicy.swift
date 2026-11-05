@@ -14,7 +14,7 @@ public func privacyPolicy() -> Node {
     ),
     .p(
       .strong("Email Collection: "),
-      "If you want to receive notifications about new posts, you can share your email address. This is entirely optional, and you can unsubscribe at any time by using the opt out/unsubscribe link at the bottom of any notifications."
+      "If you want to receive notifications about new posts, you can share your email address. This is entirely optional, and you can unsubscribe at any time by emailing contact@sergheev.com."
     ),
     .p(
       .strong("Purpose: "),
@@ -26,11 +26,11 @@ public func privacyPolicy() -> Node {
     ),
     .p(
       .strong("Data Sharing: "),
-      "Your email address is not shared with third parties."
+      "When you subscribe, your email address is only sent to me. It is not shared with anyone else."
     ),
     .p(
       .strong("Data Retention: "),
-      "If you provide your email, it's retained until you unsubscribe."
+      "If you provide your email, it's retained until you ask to unsubscribe."
     ),
     .p(
       .strong("Your Rights: "),

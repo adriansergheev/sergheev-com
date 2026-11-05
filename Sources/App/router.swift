@@ -27,6 +27,9 @@ struct SiteRouter: ParserPrinter {
           }
         }
       }
+      Route(.case(SiteRoute.rss)) {
+        Path { "rss.xml" }
+      }
       Route(.case(SiteRoute.privacyPolicy)) {
         Path { "privacy-policy" }
       }
@@ -51,6 +54,7 @@ struct SiteRouter: ParserPrinter {
 enum SiteRoute {
   case home
   case posts(PostsRoute)
+  case rss
   case privacyPolicy
   case howLongShouldAHumanLive
   case subscribe
@@ -91,6 +95,15 @@ func siteHandler(
       request: request,
       route: route
     )
+  case .rss:
+    feedFetch(request)
+    let response = Response(body: .init(string: rssFeed(router: request.application.router)))
+    response.headers.contentType = HTTPMediaType(
+      type: "application",
+      subType: "rss+xml",
+      parameters: ["charset": "utf-8"]
+    )
+    return response
   case .privacyPolicy:
     return layout(
       title: "privacy policy",
@@ -99,12 +112,12 @@ func siteHandler(
   case .howLongShouldAHumanLive:
     return howLongPage()
   case .subscribe:
-    @Dependency(\.mail) var mail
+    @Dependency(\.telegram) var telegram
     if request.method == .POST {
       let formData = try request.content.decode(SiteRoute.SubscribeData.self)
       do {
         if formData.isNotBot() {
-          try await mail.client.addContact(contact: .init(email: formData.email))
+          try await telegram.send("New subscriber: \(formData.email)", using: request.client)
         }
         return layout(title: "subscribed", content: "👍", backButton: true)
       } catch {
@@ -119,15 +132,19 @@ func siteHandler(
   }
 }
 
-func formattedDate(forPostID id: Int) -> String {
+func postDate(forPostID id: Int) -> Date? {
   @Dependency(\.calendar) var calendar
   let s = String(id)
   guard s.count == 8,
     let year = Int(s.prefix(4)),
     let month = Int(s.dropFirst(4).prefix(2)),
-    let day = Int(s.suffix(2)),
-    let date = calendar.date(from: DateComponents(year: year, month: month, day: day))
-  else { return "" }
+    let day = Int(s.suffix(2))
+  else { return nil }
+  return calendar.date(from: DateComponents(year: year, month: month, day: day))
+}
+
+func formattedDate(forPostID id: Int) -> String {
+  guard let date = postDate(forPostID: id) else { return "" }
   let formatter = DateFormatter()
   formatter.dateFormat = "MMM d, yyyy"
   return formatter.string(from: date)

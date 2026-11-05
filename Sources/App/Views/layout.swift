@@ -23,7 +23,12 @@ public func layout(
         attributes: [.href(router.url(for: .subscribe).absoluteString)],
         "Subscribe"
       ),
-      " for email alerts about new posts."
+      " for email alerts about new posts, or follow via ",
+      .a(
+        attributes: [.href(router.url(for: .rss).absoluteString)],
+        "RSS"
+      ),
+      "."
     )
   )
   return [
@@ -33,6 +38,12 @@ public func layout(
         .title(title),
         .style(unsafe: style(usePrismJS: usePrismJS)),
         .meta(viewport: .width(.deviceWidth), .initialScale(1)),
+        .link(attributes: [
+          .rel(.init(rawValue: "alternate")),
+          .init("type", "application/rss+xml"),
+          .init("title", "Adrian Sergheev"),
+          .href(router.url(for: .rss).absoluteString)
+        ]),
         fontsAndAnalytics()
       ),
       .body(

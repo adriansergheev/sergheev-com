@@ -25,7 +25,9 @@ public func homePage(_ posts: [(Int, String)]) -> Node {
         posts,
         .br,
         .a(attributes: [.href(router.url(for: .subscribe).absoluteString), .target(.blank)], "Subscribe"),
-        " for email alerts about new posts.",
+        " for email alerts about new posts, or follow via ",
+        .a(attributes: [.href(router.url(for: .rss).absoluteString), .target(.blank)], "RSS"),
+        ".",
         .br,
         .br
       ]
