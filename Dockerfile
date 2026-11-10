@@ -16,9 +16,11 @@ WORKDIR /build
 # This creates a cached layer that can be reused
 # as long as your Package.swift/Package.resolved
 # files do not change.
+# Not using --force-resolved-versions: Package.resolved is generated on macOS,
+# which omits Linux-only dependencies (e.g. OpenCombine via combine-schedulers).
+# Existing pins are still honored; only the missing ones get resolved.
 COPY ./Package.* ./
-RUN swift package resolve --skip-update \
-        $([ -f ./Package.resolved ] && echo "--force-resolved-versions" || true)
+RUN swift package resolve
 
 # Copy entire repo into container
 COPY . .
