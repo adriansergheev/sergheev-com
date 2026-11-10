@@ -10,12 +10,12 @@ let package = Package(
     .library(name: "App", targets: ["App"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
-    .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
+    .package(url: "https://github.com/vapor/vapor.git", from: "4.122.3"),
+    .package(url: "https://github.com/apple/swift-nio.git", from: "2.105.0"),
     .package(url: "https://github.com/pointfreeco/swift-html-vapor", from: "0.5.0"),
     .package(url: "https://github.com/pointfreeco/vapor-routing", from: "0.1.3"),
     .package(url: "https://github.com/JohnSundell/Ink", exact: "0.6.0"),
-    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.2")
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.17.2")
   ],
   targets: [
     .executableTarget(
