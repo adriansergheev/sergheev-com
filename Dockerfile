@@ -1,7 +1,7 @@
 # ================================
 # Build image
 # ================================
-FROM --platform=linux/arm64 swift:6.4.1-jammy as build
+FROM --platform=linux/arm64 swift:6.4.2-jammy as build
 
 # Install OS updates
 RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
